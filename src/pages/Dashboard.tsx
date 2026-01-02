@@ -4,6 +4,7 @@ import EnvironmentMetrics from '@/components/dashboard/EnvironmentMetrics';
 import SocialMetrics from '@/components/dashboard/SocialMetrics';
 import GovernanceMetrics from '@/components/dashboard/GovernanceMetrics';
 import DashboardSummary from '@/components/dashboard/DashboardSummary';
+import ReportGenerator from '@/components/dashboard/ReportGenerator';
 
 const Dashboard = () => {
   const { user, role } = useAuth();
@@ -27,6 +28,10 @@ const Dashboard = () => {
         </div>
 
         <DashboardSummary />
+
+        <div className="mt-8">
+          <ReportGenerator />
+        </div>
 
         <div className="grid gap-8 mt-8">
           <EnvironmentMetrics />
