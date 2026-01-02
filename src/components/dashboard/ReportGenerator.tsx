@@ -155,14 +155,14 @@ const ReportGenerator = () => {
       toast.success('Report generated successfully!', {
         description: `Your ${selectedFramework.toUpperCase()} report is ready.`,
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error('Report generation error:', error);
       const currentStep = steps.find((s) => s.status === 'in-progress');
       if (currentStep) {
-        updateStep(currentStep.name, 'error', error.message);
+        updateStep(currentStep.name, 'error', error instanceof Error ? error.message : 'Unknown error');
       }
       toast.error('Report generation failed', {
-        description: error.message || 'An unexpected error occurred',
+        description: error instanceof Error ? error.message : 'An unexpected error occurred',
       });
     } finally {
       setIsGenerating(false);

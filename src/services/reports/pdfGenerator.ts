@@ -8,6 +8,12 @@ import autoTable from 'jspdf-autotable';
 import { format } from 'date-fns';
 import type { ComplianceFramework, ESGDataInput } from '../ai/agents';
 import { AgentOrchestrator } from '../ai/agents';
+import type { Tables } from '@/integrations/supabase/types';
+
+// Extend jsPDF type to include autoTable property
+interface jsPDFWithAutoTable extends jsPDF {
+  lastAutoTable?: { finalY: number };
+}
 
 interface ReportMetadata {
   companyName: string;
@@ -332,12 +338,12 @@ export class PDFReportGenerator {
       });
 
       if (quality.issues && quality.issues.length > 0) {
-        const currentY = (pdf as any).lastAutoTable.finalY + 10;
+        const currentY = (pdf as jsPDFWithAutoTable).lastAutoTable?.finalY ?? 100;
         pdf.setFontSize(14);
         pdf.setFont('helvetica', 'bold');
         pdf.text('Data Quality Issues', x, currentY);
         
-        const issuesData = quality.issues.map((issue: any) => [
+        const issuesData = quality.issues.map((issue: { severity: string; field: string; issue: string; recommendation: string }) => [
           issue.severity.toUpperCase(),
           issue.field,
           issue.issue,
@@ -359,7 +365,7 @@ export class PDFReportGenerator {
     }
   }
 
-  private addEnvironmentalMetricsTable(pdf: jsPDF, data: any[], x: number) {
+  private addEnvironmentalMetricsTable(pdf: jsPDF, data: Tables<'environmental_data'>[], x: number) {
     if (!data || data.length === 0) return;
 
     const latest = data[0];
@@ -374,7 +380,7 @@ export class PDFReportGenerator {
     ];
 
     autoTable(pdf, {
-      startY: (pdf as any).lastAutoTable?.finalY + 10 || pdf.internal.pageSize.getHeight() / 2,
+      startY: (pdf as jsPDFWithAutoTable).lastAutoTable?.finalY ? (pdf as jsPDFWithAutoTable).lastAutoTable!.finalY + 10 : pdf.internal.pageSize.getHeight() / 2,
       head: [['Metric', 'Value']],
       body: tableData,
       theme: 'grid',
@@ -382,7 +388,7 @@ export class PDFReportGenerator {
     });
   }
 
-  private addSocialMetricsTable(pdf: jsPDF, data: any[], x: number) {
+  private addSocialMetricsTable(pdf: jsPDF, data: Tables<'social_data'>[], x: number) {
     if (!data || data.length === 0) return;
 
     const latest = data[0];
@@ -397,7 +403,7 @@ export class PDFReportGenerator {
     ];
 
     autoTable(pdf, {
-      startY: (pdf as any).lastAutoTable?.finalY + 10 || pdf.internal.pageSize.getHeight() / 2,
+      startY: (pdf as jsPDFWithAutoTable).lastAutoTable?.finalY ? (pdf as jsPDFWithAutoTable).lastAutoTable!.finalY + 10 : pdf.internal.pageSize.getHeight() / 2,
       head: [['Metric', 'Value']],
       body: tableData,
       theme: 'grid',
@@ -405,7 +411,7 @@ export class PDFReportGenerator {
     });
   }
 
-  private addGovernanceMetricsTable(pdf: jsPDF, data: any[], x: number) {
+  private addGovernanceMetricsTable(pdf: jsPDF, data: Tables<'governance_data'>[], x: number) {
     if (!data || data.length === 0) return;
 
     const latest = data[0];
@@ -421,7 +427,7 @@ export class PDFReportGenerator {
     ];
 
     autoTable(pdf, {
-      startY: (pdf as any).lastAutoTable?.finalY + 10 || pdf.internal.pageSize.getHeight() / 2,
+      startY: (pdf as jsPDFWithAutoTable).lastAutoTable?.finalY ? (pdf as jsPDFWithAutoTable).lastAutoTable!.finalY + 10 : pdf.internal.pageSize.getHeight() / 2,
       head: [['Metric', 'Value']],
       body: tableData,
       theme: 'grid',
@@ -450,7 +456,7 @@ export class PDFReportGenerator {
       y += 10;
 
       if (mapping.requirements) {
-        const reqData = mapping.requirements.map((req: any) => [
+        const reqData = mapping.requirements.map((req: { requirement: string; compliance: number; gaps?: string[]; recommendations?: string[] }) => [
           req.requirement,
           `${req.compliance}%`,
           req.gaps?.length || 0,
@@ -473,14 +479,14 @@ export class PDFReportGenerator {
       }
 
       if (mapping.summary) {
-        const summaryY = (pdf as any).lastAutoTable.finalY + 10;
+        const summaryYPos = ((pdf as jsPDFWithAutoTable).lastAutoTable?.finalY ?? 100) + 10;
         pdf.setFontSize(12);
         pdf.setFont('helvetica', 'bold');
-        pdf.text('Summary', x, summaryY);
+        pdf.text('Summary', x, summaryYPos);
         pdf.setFont('helvetica', 'normal');
         pdf.setFontSize(10);
         const summaryLines = pdf.splitTextToSize(mapping.summary, pdf.internal.pageSize.getWidth() - 2 * x);
-        pdf.text(summaryLines, x, summaryY + 7);
+        pdf.text(summaryLines, x, summaryYPos + 7);
       }
     } catch (e) {
       pdf.setFontSize(10);

@@ -24,7 +24,7 @@ export interface ESGDataInput {
 export interface AgentResponse {
   agent: string;
   output: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -244,7 +244,7 @@ Write in third person, present tense. Be specific with numbers and percentages.`
 
   async generateDetailedSections(
     pillar: 'environmental' | 'social' | 'governance',
-    data: any[],
+    data: unknown[],
     framework: ComplianceFramework,
     mappingOutput: string
   ): Promise<AgentResponse> {
