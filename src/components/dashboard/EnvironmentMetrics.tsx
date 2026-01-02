@@ -1,5 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { useEnvironmentalData, useUserProfile } from '@/integrations/supabase/hooks';
+import { Loader2 } from 'lucide-react';
 
 const emissionsData = [
   { month: 'Jan', scope1: 2400, scope2: 1800, scope3: 4200 },
@@ -23,6 +25,18 @@ const energyData = [
 ];
 
 const EnvironmentMetrics = () => {
+  const { data: profile } = useUserProfile();
+  const { data: envData, isLoading } = useEnvironmentalData(profile?.id);
+  const latestData = envData?.[0];
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <Loader2 className="h-6 w-6 animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">

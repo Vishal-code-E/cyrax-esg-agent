@@ -1,6 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { Badge } from '@/components/ui/badge';
+import { useSocialData, useUserProfile } from '@/integrations/supabase/hooks';
+import { Loader2 } from 'lucide-react';
 
 const safetyData = [
   { month: 'Jan', incidents: 4, nearMisses: 12 },
@@ -30,6 +32,18 @@ const laborMetrics = [
 ];
 
 const SocialMetrics = () => {
+  const { data: profile } = useUserProfile();
+  const { data: socialData, isLoading } = useSocialData(profile?.id);
+  const latestData = socialData?.[0];
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <Loader2 className="h-6 w-6 animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">

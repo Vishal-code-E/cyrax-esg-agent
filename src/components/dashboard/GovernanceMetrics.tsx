@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, AlertCircle, Clock, Shield } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Clock, Shield, Loader2 } from 'lucide-react';
+import { useGovernanceData, useUserProfile } from '@/integrations/supabase/hooks';
 
 const complianceItems = [
   { framework: 'GRI Standards', status: 'compliant', coverage: 94 },
@@ -28,6 +29,18 @@ const boardMetrics = [
 ];
 
 const GovernanceMetrics = () => {
+  const { data: profile } = useUserProfile();
+  const { data: govData, isLoading } = useGovernanceData(profile?.id);
+  const latestData = govData?.[0];
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <Loader2 className="h-6 w-6 animate-spin" />
+      </div>
+    );
+  }
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'compliant':
