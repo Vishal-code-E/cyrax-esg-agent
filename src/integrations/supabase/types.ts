@@ -14,6 +14,324 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_logs: {
+        Row: {
+          id: string
+          company_id: string | null
+          user_id: string | null
+          action: string
+          entity_type: string
+          entity_id: string | null
+          changes: Json | null
+          ip_address: string | null
+          user_agent: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          company_id?: string | null
+          user_id?: string | null
+          action: string
+          entity_type: string
+          entity_id?: string | null
+          changes?: Json | null
+          ip_address?: string | null
+          user_agent?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          company_id?: string | null
+          user_id?: string | null
+          action?: string
+          entity_type?: string
+          entity_id?: string | null
+          changes?: Json | null
+          ip_address?: string | null
+          user_agent?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      data_integrations: {
+        Row: {
+          id: string
+          company_id: string
+          name: string
+          source_type: Database["public"]["Enums"]["data_source_type"]
+          connection_config: Json | null
+          api_endpoint: string | null
+          active: boolean
+          last_sync_at: string | null
+          last_sync_status: string | null
+          sync_frequency: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          company_id: string
+          name: string
+          source_type: Database["public"]["Enums"]["data_source_type"]
+          connection_config?: Json | null
+          api_endpoint?: string | null
+          active?: boolean
+          last_sync_at?: string | null
+          last_sync_status?: string | null
+          sync_frequency?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          company_id?: string
+          name?: string
+          source_type?: Database["public"]["Enums"]["data_source_type"]
+          connection_config?: Json | null
+          api_endpoint?: string | null
+          active?: boolean
+          last_sync_at?: string | null
+          last_sync_status?: string | null
+          sync_frequency?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      environmental_data: {
+        Row: {
+          id: string
+          company_id: string
+          data_source: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start: string
+          reporting_period_end: string
+          scope_1_emissions: number | null
+          scope_2_emissions: number | null
+          scope_3_emissions: number | null
+          total_emissions: number | null
+          fuel_consumption: number | null
+          electricity_consumption: number | null
+          renewable_energy_percentage: number | null
+          total_vehicles: number | null
+          ev_vehicles: number | null
+          ice_vehicles: number | null
+          route_efficiency_score: number | null
+          warehouse_energy_kwh: number | null
+          packaging_waste_tons: number | null
+          recycling_rate_percentage: number | null
+          data_quality_score: number | null
+          verified: boolean
+          created_at: string
+          updated_at: string
+          created_by: string | null
+        }
+        Insert: {
+          id?: string
+          company_id: string
+          data_source: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start: string
+          reporting_period_end: string
+          scope_1_emissions?: number | null
+          scope_2_emissions?: number | null
+          scope_3_emissions?: number | null
+          total_emissions?: number | null
+          fuel_consumption?: number | null
+          electricity_consumption?: number | null
+          renewable_energy_percentage?: number | null
+          total_vehicles?: number | null
+          ev_vehicles?: number | null
+          ice_vehicles?: number | null
+          route_efficiency_score?: number | null
+          warehouse_energy_kwh?: number | null
+          packaging_waste_tons?: number | null
+          recycling_rate_percentage?: number | null
+          data_quality_score?: number | null
+          verified?: boolean
+          created_at?: string
+          updated_at?: string
+          created_by?: string | null
+        }
+        Update: {
+          id?: string
+          company_id?: string
+          data_source?: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start?: string
+          reporting_period_end?: string
+          scope_1_emissions?: number | null
+          scope_2_emissions?: number | null
+          scope_3_emissions?: number | null
+          total_emissions?: number | null
+          fuel_consumption?: number | null
+          electricity_consumption?: number | null
+          renewable_energy_percentage?: number | null
+          total_vehicles?: number | null
+          ev_vehicles?: number | null
+          ice_vehicles?: number | null
+          route_efficiency_score?: number | null
+          warehouse_energy_kwh?: number | null
+          packaging_waste_tons?: number | null
+          recycling_rate_percentage?: number | null
+          data_quality_score?: number | null
+          verified?: boolean
+          created_at?: string
+          updated_at?: string
+          created_by?: string | null
+        }
+        Relationships: []
+      }
+      esg_reports: {
+        Row: {
+          id: string
+          company_id: string
+          title: string
+          framework: Database["public"]["Enums"]["compliance_framework"]
+          reporting_period_start: string
+          reporting_period_end: string
+          status: Database["public"]["Enums"]["report_status"]
+          executive_summary: string | null
+          report_data: Json | null
+          file_url: string | null
+          file_type: string | null
+          generated_at: string | null
+          published_at: string | null
+          created_at: string
+          updated_at: string
+          created_by: string | null
+        }
+        Insert: {
+          id?: string
+          company_id: string
+          title: string
+          framework: Database["public"]["Enums"]["compliance_framework"]
+          reporting_period_start: string
+          reporting_period_end: string
+          status?: Database["public"]["Enums"]["report_status"]
+          executive_summary?: string | null
+          report_data?: Json | null
+          file_url?: string | null
+          file_type?: string | null
+          generated_at?: string | null
+          published_at?: string | null
+          created_at?: string
+          updated_at?: string
+          created_by?: string | null
+        }
+        Update: {
+          id?: string
+          company_id?: string
+          title?: string
+          framework?: Database["public"]["Enums"]["compliance_framework"]
+          reporting_period_start?: string
+          reporting_period_end?: string
+          status?: Database["public"]["Enums"]["report_status"]
+          executive_summary?: string | null
+          report_data?: Json | null
+          file_url?: string | null
+          file_type?: string | null
+          generated_at?: string | null
+          published_at?: string | null
+          created_at?: string
+          updated_at?: string
+          created_by?: string | null
+        }
+        Relationships: []
+      }
+      governance_data: {
+        Row: {
+          id: string
+          company_id: string
+          data_source: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start: string
+          reporting_period_end: string
+          board_esg_oversight: boolean | null
+          esg_committee_exists: boolean | null
+          independent_directors_percentage: number | null
+          ethics_policy_updated_date: string | null
+          code_of_conduct_violations: number | null
+          corruption_incidents: number | null
+          anti_bribery_training_completed: number | null
+          supplier_contracts_reviewed: number | null
+          supplier_contracts_compliant: number | null
+          supplier_risk_assessments_completed: number | null
+          internal_audits_completed: number | null
+          external_audits_completed: number | null
+          audit_findings: number | null
+          findings_remediated: number | null
+          cybersecurity_incidents: number | null
+          data_breaches: number | null
+          security_training_completion_percentage: number | null
+          regulatory_violations: number | null
+          fines_paid: number | null
+          data_quality_score: number | null
+          verified: boolean
+          created_at: string
+          updated_at: string
+          created_by: string | null
+        }
+        Insert: {
+          id?: string
+          company_id: string
+          data_source: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start: string
+          reporting_period_end: string
+          board_esg_oversight?: boolean | null
+          esg_committee_exists?: boolean | null
+          independent_directors_percentage?: number | null
+          ethics_policy_updated_date?: string | null
+          code_of_conduct_violations?: number | null
+          corruption_incidents?: number | null
+          anti_bribery_training_completed?: number | null
+          supplier_contracts_reviewed?: number | null
+          supplier_contracts_compliant?: number | null
+          supplier_risk_assessments_completed?: number | null
+          internal_audits_completed?: number | null
+          external_audits_completed?: number | null
+          audit_findings?: number | null
+          findings_remediated?: number | null
+          cybersecurity_incidents?: number | null
+          data_breaches?: number | null
+          security_training_completion_percentage?: number | null
+          regulatory_violations?: number | null
+          fines_paid?: number | null
+          data_quality_score?: number | null
+          verified?: boolean
+          created_at?: string
+          updated_at?: string
+          created_by?: string | null
+        }
+        Update: {
+          id?: string
+          company_id?: string
+          data_source?: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start?: string
+          reporting_period_end?: string
+          board_esg_oversight?: boolean | null
+          esg_committee_exists?: boolean | null
+          independent_directors_percentage?: number | null
+          ethics_policy_updated_date?: string | null
+          code_of_conduct_violations?: number | null
+          corruption_incidents?: number | null
+          anti_bribery_training_completed?: number | null
+          supplier_contracts_reviewed?: number | null
+          supplier_contracts_compliant?: number | null
+          supplier_risk_assessments_completed?: number | null
+          internal_audits_completed?: number | null
+          external_audits_completed?: number | null
+          audit_findings?: number | null
+          findings_remediated?: number | null
+          cybersecurity_incidents?: number | null
+          data_breaches?: number | null
+          security_training_completion_percentage?: number | null
+          regulatory_violations?: number | null
+          fines_paid?: number | null
+          data_quality_score?: number | null
+          verified?: boolean
+          created_at?: string
+          updated_at?: string
+          created_by?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           company_name: string | null
@@ -38,6 +356,153 @@ export type Database = {
           id?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      social_data: {
+        Row: {
+          id: string
+          company_id: string
+          data_source: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start: string
+          reporting_period_end: string
+          total_incidents: number | null
+          lost_time_incidents: number | null
+          incident_rate: number | null
+          safety_training_hours: number | null
+          total_employees: number | null
+          training_hours_per_employee: number | null
+          average_wage: number | null
+          wage_compliance_percentage: number | null
+          forced_labor_risk_score: Database["public"]["Enums"]["risk_level"] | null
+          child_labor_risk_score: Database["public"]["Enums"]["risk_level"] | null
+          supplier_audits_completed: number | null
+          grievances_reported: number | null
+          grievances_resolved: number | null
+          female_employees_percentage: number | null
+          leadership_diversity_percentage: number | null
+          data_quality_score: number | null
+          verified: boolean
+          created_at: string
+          updated_at: string
+          created_by: string | null
+        }
+        Insert: {
+          id?: string
+          company_id: string
+          data_source: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start: string
+          reporting_period_end: string
+          total_incidents?: number | null
+          lost_time_incidents?: number | null
+          incident_rate?: number | null
+          safety_training_hours?: number | null
+          total_employees?: number | null
+          training_hours_per_employee?: number | null
+          average_wage?: number | null
+          wage_compliance_percentage?: number | null
+          forced_labor_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          child_labor_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          supplier_audits_completed?: number | null
+          grievances_reported?: number | null
+          grievances_resolved?: number | null
+          female_employees_percentage?: number | null
+          leadership_diversity_percentage?: number | null
+          data_quality_score?: number | null
+          verified?: boolean
+          created_at?: string
+          updated_at?: string
+          created_by?: string | null
+        }
+        Update: {
+          id?: string
+          company_id?: string
+          data_source?: Database["public"]["Enums"]["data_source_type"]
+          reporting_period_start?: string
+          reporting_period_end?: string
+          total_incidents?: number | null
+          lost_time_incidents?: number | null
+          incident_rate?: number | null
+          safety_training_hours?: number | null
+          total_employees?: number | null
+          training_hours_per_employee?: number | null
+          average_wage?: number | null
+          wage_compliance_percentage?: number | null
+          forced_labor_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          child_labor_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          supplier_audits_completed?: number | null
+          grievances_reported?: number | null
+          grievances_resolved?: number | null
+          female_employees_percentage?: number | null
+          leadership_diversity_percentage?: number | null
+          data_quality_score?: number | null
+          verified?: boolean
+          created_at?: string
+          updated_at?: string
+          created_by?: string | null
+        }
+        Relationships: []
+      }
+      suppliers: {
+        Row: {
+          id: string
+          company_id: string
+          name: string
+          tier: number
+          country: string | null
+          industry: string | null
+          overall_risk_score: Database["public"]["Enums"]["risk_level"] | null
+          environmental_risk_score: Database["public"]["Enums"]["risk_level"] | null
+          social_risk_score: Database["public"]["Enums"]["risk_level"] | null
+          governance_risk_score: Database["public"]["Enums"]["risk_level"] | null
+          last_audit_date: string | null
+          next_audit_date: string | null
+          certifications: Json | null
+          contact_email: string | null
+          contact_phone: string | null
+          active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          company_id: string
+          name: string
+          tier: number
+          country?: string | null
+          industry?: string | null
+          overall_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          environmental_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          social_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          governance_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          last_audit_date?: string | null
+          next_audit_date?: string | null
+          certifications?: Json | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          company_id?: string
+          name?: string
+          tier?: number
+          country?: string | null
+          industry?: string | null
+          overall_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          environmental_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          social_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          governance_risk_score?: Database["public"]["Enums"]["risk_level"] | null
+          last_audit_date?: string | null
+          next_audit_date?: string | null
+          certifications?: Json | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          active?: boolean
+          created_at?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -81,6 +546,11 @@ export type Database = {
     }
     Enums: {
       app_role: "esg_manager" | "auditor" | "supplier"
+      compliance_framework: "gri" | "tcfd" | "sasb" | "csrd" | "csddd" | "uk_modern_slavery"
+      data_source_type: "erp" | "tms" | "data_lake" | "supplier_platform" | "manual" | "api"
+      esg_pillar: "environmental" | "social" | "governance"
+      report_status: "draft" | "in_progress" | "completed" | "published"
+      risk_level: "low" | "medium" | "high" | "critical"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -209,6 +679,11 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["esg_manager", "auditor", "supplier"],
+      compliance_framework: ["gri", "tcfd", "sasb", "csrd", "csddd", "uk_modern_slavery"],
+      data_source_type: ["erp", "tms", "data_lake", "supplier_platform", "manual", "api"],
+      esg_pillar: ["environmental", "social", "governance"],
+      report_status: ["draft", "in_progress", "completed", "published"],
+      risk_level: ["low", "medium", "high", "critical"],
     },
   },
 } as const
