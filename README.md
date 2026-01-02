@@ -1,73 +1,171 @@
-# Welcome to your Lovable project
+# CYRAX ESG Agent
 
-## Project info
+> AI-Native ESG Intelligence & Reporting Platform for Global Logistics
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Overview
 
-## How can I edit this code?
+CYRAX is an enterprise-grade ESG (Environmental, Social, Governance) operating system that transforms fragmented ESG data into audit-ready compliance reports. Built specifically for global logistics companies, CYRAX automates compliance with CSRD, CSDDD, UK Modern Slavery Act, and other critical regulatory frameworks.
 
-There are several ways of editing your application.
+## Key Features
 
-**Use Lovable**
+### 🤖 Multi-Agent AI Orchestration
+- **Data Ingestion Agent**: Parses structured/unstructured data and normalizes into ESG schema
+- **Supplier Intelligence Agent**: Maps Tier-1 → Tier-N suppliers with risk scoring
+- **Regulatory Mapping Agent**: Automatically maps data to GRI, TCFD, SASB frameworks
+- **Reporting Agent**: Generates PDF, DOCX, XBRL with framework-specific language
+- **Audit & Integrity Agent**: Maintains immutable audit trail with data lineage
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### 📊 ESG Coverage
+- **Environmental**: Carbon accounting, fleet emissions, Scope 1/2/3, warehouse energy
+- **Social**: Labor rights, health & safety, wage compliance, supply chain integrity
+- **Governance**: Board oversight, ethics policies, cybersecurity, regulatory tracking
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🔗 Integrations
+- ERP systems (SAP, Oracle, Microsoft Dynamics)
+- TMS platforms (Manhattan, Blue Yonder)
+- Data lakes (Databricks, Snowflake, AWS S3, Azure Data Lake)
+- Supplier platforms (Ariba, Coupa)
 
-**Use your preferred IDE**
+### 📋 Regulatory Frameworks
+- CSRD (Corporate Sustainability Reporting Directive)
+- CSDDD (Corporate Sustainability Due Diligence Directive)
+- GRI (Global Reporting Initiative)
+- TCFD (Task Force on Climate-related Financial Disclosures)
+- SASB (Sustainability Accounting Standards Board)
+- UK Modern Slavery Act
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Technology Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Frontend**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **UI Framework**: shadcn/ui + Tailwind CSS
+- **State Management**: TanStack Query (React Query)
+- **Routing**: React Router v6
+- **Backend**: Supabase
+- **AI Orchestration**: LangChain + LangGraph
 
-Follow these steps:
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm (recommended to install via [nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
+- Git
+
+### Installation
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to the project directory
+cd cyrax-esg-agent
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Available Scripts
 
-**Use GitHub Codespaces**
+```sh
+# Start development server
+npm run dev
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Build for production
+npm run build
 
-## What technologies are used for this project?
+# Build for development environment
+npm run build:dev
 
-This project is built with:
+# Lint code
+npm run lint
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+# Preview production build
+npm run preview
+```
 
-## How can I deploy this project?
+## Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+```
+cyrax-esg-agent/
+├── src/
+│   ├── components/
+│   │   ├── landing/          # Landing page components
+│   │   │   ├── Hero.tsx
+│   │   │   ├── AIOrchestration.tsx
+│   │   │   ├── ESGPillars.tsx
+│   │   │   ├── Integrations.tsx
+│   │   │   ├── Frameworks.tsx
+│   │   │   └── ...
+│   │   └── ui/              # Reusable UI components (shadcn/ui)
+│   ├── pages/               # Page components
+│   ├── hooks/               # Custom React hooks
+│   ├── integrations/        # External integrations (Supabase)
+│   ├── lib/                 # Utility functions
+│   ├── App.tsx              # Main application component
+│   └── main.tsx             # Application entry point
+├── public/                  # Static assets
+├── supabase/               # Supabase configuration
+└── package.json
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Development
 
-Yes, you can!
+### Code Style
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+This project uses ESLint for code quality. Run `npm run lint` to check for issues.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### Component Library
+
+UI components are built with shadcn/ui, a collection of re-usable components built with Radix UI and Tailwind CSS. Components are located in `src/components/ui/`.
+
+## Deployment
+
+### Production Build
+
+```sh
+npm run build
+```
+
+This creates an optimized production build in the `dist/` directory.
+
+### Deployment Options
+
+- **Vercel**: Connect your repository and deploy automatically
+- **Netlify**: Drag and drop the `dist/` folder or connect via Git
+- **AWS S3 + CloudFront**: Upload `dist/` to S3 and configure CloudFront
+- **Azure Static Web Apps**: Deploy via Azure CLI or GitHub Actions
+- **Traditional Hosting**: Upload the `dist/` folder to any static hosting service
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+Copyright © 2026 CYRAX. All rights reserved.
+
+## Support
+
+For support, please contact: support@cyrax.io
+
+---
+
+**Built with ❤️ for sustainable global logistics**
