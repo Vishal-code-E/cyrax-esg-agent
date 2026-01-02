@@ -247,7 +247,7 @@ CREATE POLICY "ESG Managers can insert environmental data"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 CREATE POLICY "ESG Managers can update environmental data"
@@ -256,7 +256,7 @@ CREATE POLICY "ESG Managers can update environmental data"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 -- RLS Policies for Social Data
@@ -274,7 +274,7 @@ CREATE POLICY "ESG Managers can insert social data"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 CREATE POLICY "ESG Managers can update social data"
@@ -283,7 +283,7 @@ CREATE POLICY "ESG Managers can update social data"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 -- RLS Policies for Governance Data
@@ -301,7 +301,7 @@ CREATE POLICY "ESG Managers can insert governance data"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 CREATE POLICY "ESG Managers can update governance data"
@@ -310,7 +310,7 @@ CREATE POLICY "ESG Managers can update governance data"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 -- RLS Policies for Suppliers
@@ -328,7 +328,7 @@ CREATE POLICY "ESG Managers can manage suppliers"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 -- RLS Policies for ESG Reports
@@ -346,7 +346,7 @@ CREATE POLICY "ESG Managers can manage reports"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 -- RLS Policies for Data Integrations
@@ -364,7 +364,7 @@ CREATE POLICY "ESG Managers can manage integrations"
     company_id IN (
       SELECT id FROM public.profiles WHERE user_id = auth.uid()
     )
-    AND public.has_role(auth.uid(), 'esg_manager')
+    AND public.has_role(auth.uid(), 'esg_manager'::app_role)
   );
 
 -- RLS Policies for Audit Logs
